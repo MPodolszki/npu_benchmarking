@@ -1,0 +1,31 @@
+{
+  "dataset": "COCO val2017",
+  "imgsz": 1024,
+  "batch": 1,
+  "images_evaluated": 200,
+  "avg_latency_ms": 320.76979228497294,
+  "fps_from_avg_latency": 3.117500537929696,
+  "timing_definition": {
+    "includes_preprocess": true,
+    "includes_inference": true,
+    "includes_postprocess": true,
+    "includes_nms": true,
+    "includes_memory_transfers": false
+  },
+  "runtime": {
+    "available_providers": [
+      "TensorrtExecutionProvider",
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "enabled_providers": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "result_tag": "host_cpu",
+  "artifacts": {
+    "detections": "coco_detections_host_cpu.json",
+    "timing_csv": "timing_breakdown_host_cpu.csv",
+    "timing_json": "metrics_host_cpu_timing_only.json"
+  }
+}

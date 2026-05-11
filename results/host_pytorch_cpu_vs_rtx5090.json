@@ -1,0 +1,28 @@
+{
+  "cpu": {
+    "latency_ms": 118.71973429602986,
+    "fps": 8.423199444723162,
+    "mAP50": 0.11643218405488504,
+    "mAP50_95": 0.08434275938250592,
+    "runtime": {
+      "framework": "pytorch_ultralytics",
+      "torch_cuda_available": false,
+      "torch_cuda_device": null,
+      "requested_device": "cpu"
+    }
+  },
+  "gpu_rtx5090": {
+    "latency_ms": 9.986407587963186,
+    "fps": 100.13610912549971,
+    "mAP50": 0.11644501092338698,
+    "mAP50_95": 0.08432868558843089,
+    "runtime": {
+      "framework": "pytorch_ultralytics",
+      "torch_cuda_available": true,
+      "torch_cuda_device": "NVIDIA GeForce RTX 5090 Laptop GPU",
+      "requested_device": "0"
+    }
+  },
+  "speedup_fps_x": 11.888132268817577,
+  "latency_reduction_percent": 91.58824971502894
+}

@@ -1,0 +1,10 @@
+{
+  "mAP50_95": 0.4094,
+  "mAP50": 0.5657,
+  "mAP75": 0.4647,
+  "AP_small": 0.1856,
+  "AP_medium": 0.5133,
+  "AP_large": 0.4619,
+  "images_evaluated": 97,
+  "note": "smoke-test 100 images, NPU Neutron delegate SDK 3.1.0"
+}

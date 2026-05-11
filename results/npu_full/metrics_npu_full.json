@@ -1,0 +1,19 @@
+{
+  "board": "i.MX95 imx95-phyflex-libra-rdk-2",
+  "bsp": "BSP-Yocto-NXP-i.MX95-ALPHA2-devel",
+  "kernel": "6.12.34",
+  "neutron_sdk": "3.1.0",
+  "delegate_version": "v1.0.0-d98743a7",
+  "model": "YOLOv8s INT8 1024x1024 (Neutron-converted)",
+  "dataset": "COCO val2017 (5000 images)",
+  "mAP50_95": 0.3354,
+  "mAP50": 0.5019,
+  "mAP75": 0.3623,
+  "AP_small": 0.1899,
+  "AP_medium": 0.415,
+  "AP_large": 0.42,
+  "images_evaluated": 5000,
+  "avg_invoke_ms": 145.5,
+  "avg_total_ms": 296.2,
+  "fps": 3.38
+}

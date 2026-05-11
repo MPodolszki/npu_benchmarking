@@ -1,0 +1,30 @@
+{
+  "dataset": "COCO val2017",
+  "imgsz": 1024,
+  "batch": 1,
+  "images_evaluated": 1,
+  "avg_latency_ms": 297.9459210000641,
+  "fps_from_avg_latency": 3.35631377883433,
+  "timing_definition": {
+    "includes_preprocess": true,
+    "includes_inference": true,
+    "includes_postprocess": true,
+    "includes_nms": true,
+    "includes_memory_transfers": false
+  },
+  "runtime": {
+    "available_providers": [
+      "AzureExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "enabled_providers": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "result_tag": "smoke_mem_guard",
+  "artifacts": {
+    "detections": "coco_detections_smoke_mem_guard.json",
+    "timing_csv": "timing_breakdown_smoke_mem_guard.csv",
+    "timing_json": "metrics_smoke_mem_guard_timing_only.json"
+  }
+}

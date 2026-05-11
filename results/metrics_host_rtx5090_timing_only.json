@@ -1,0 +1,32 @@
+{
+  "dataset": "COCO val2017",
+  "imgsz": 1024,
+  "batch": 1,
+  "images_evaluated": 200,
+  "avg_latency_ms": 16.52753729502365,
+  "fps_from_avg_latency": 60.50508204274902,
+  "timing_definition": {
+    "includes_preprocess": true,
+    "includes_inference": true,
+    "includes_postprocess": true,
+    "includes_nms": true,
+    "includes_memory_transfers": false
+  },
+  "runtime": {
+    "available_providers": [
+      "TensorrtExecutionProvider",
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "enabled_providers": [
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ]
+  },
+  "result_tag": "host_rtx5090",
+  "artifacts": {
+    "detections": "coco_detections_host_rtx5090.json",
+    "timing_csv": "timing_breakdown_host_rtx5090.csv",
+    "timing_json": "metrics_host_rtx5090_timing_only.json"
+  }
+}

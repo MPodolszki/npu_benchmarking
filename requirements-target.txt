@@ -1,0 +1,5 @@
+onnxruntime
+pycocotools
+opencv-python-headless
+numpy
+pandas

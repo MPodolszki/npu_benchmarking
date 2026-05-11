@@ -1,0 +1,30 @@
+.venv/
+__pycache__/
+*.pyc
+logs/*.log
+
+# Rohe Inferenz-Outputs (gross) ausschliessen
+results/coco_detections_*.json
+results/timing_breakdown_*.csv
+
+# Aber aggregierte Metriken und npu_full Ergebnisse einchecken
+!results/npu_full/
+!results/npu_smoke/
+!results/npu_full/*.json
+!results/npu_smoke/*.json
+
+# Grosse Daten
+data/coco/val2017/
+data/coco/annotations/
+data/coco/val2017.zip
+data/coco/annotations_trainval2017.zip
+*.cache
+*.npy
+
+# Modell-Binaries (gross)
+*.pt
+*.onnx
+yolov8s_saved_model/
+
+# Build/Dist
+dist/

@@ -1,0 +1,17 @@
+ultralytics
+tensorflow
+tf_keras<=2.19.0
+onnx2tf>=1.26.3,<1.29.0
+sng4onnx>=1.0.1
+onnx_graphsurgeon>=0.3.26
+ai-edge-litert>=1.2.0
+numpy==2.0.2
+protobuf>=5
+onnx
+onnxruntime
+onnxsim
+pycocotools
+opencv-python
+numpy
+pandas
+PyYAML

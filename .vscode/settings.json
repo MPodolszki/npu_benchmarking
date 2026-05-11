@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^python3 -m py_compile scripts/08_run_inference_imx95\\.py scripts/13_run_pytorch_inference_host\\.py$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

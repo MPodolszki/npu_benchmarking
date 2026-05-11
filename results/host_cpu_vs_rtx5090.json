@@ -1,0 +1,23 @@
+{
+  "cpu": {
+    "latency_ms": 320.76979228497294,
+    "fps": 3.117500537929696,
+    "mAP50": 0.0254681796404518,
+    "mAP50_95": 0.019223906730327322,
+    "providers": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "rtx5090": {
+    "latency_ms": 16.52753729502365,
+    "fps": 60.50508204274902,
+    "mAP50": 0.025395402631308454,
+    "mAP50_95": 0.019217275948637823,
+    "providers": [
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ]
+  },
+  "speedup_fps_x": 19.40820259903785,
+  "latency_reduction_percent": 94.84753935921107
+}

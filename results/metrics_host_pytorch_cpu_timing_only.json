@@ -1,0 +1,28 @@
+{
+  "dataset": "COCO val2017",
+  "imgsz": 1024,
+  "batch": 1,
+  "images_evaluated": 1000,
+  "avg_latency_ms": 118.71973429602986,
+  "fps_from_avg_latency": 8.423199444723162,
+  "timing_definition": {
+    "includes_preprocess": true,
+    "includes_inference": true,
+    "includes_postprocess": true,
+    "includes_nms": true,
+    "includes_memory_transfers": false,
+    "notes": "Ultralytics predict pipeline; timings are end-to-end per image."
+  },
+  "runtime": {
+    "framework": "pytorch_ultralytics",
+    "torch_cuda_available": false,
+    "torch_cuda_device": null,
+    "requested_device": "cpu"
+  },
+  "result_tag": "host_pytorch_cpu",
+  "artifacts": {
+    "detections": "coco_detections_host_pytorch_cpu.json",
+    "timing_csv": "timing_breakdown_host_pytorch_cpu.csv",
+    "timing_json": "metrics_host_pytorch_cpu_timing_only.json"
+  }
+}

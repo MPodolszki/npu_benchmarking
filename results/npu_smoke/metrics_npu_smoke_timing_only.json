@@ -1,0 +1,12 @@
+{
+  "dataset": "COCO val2017",
+  "imgsz": 1024,
+  "batch": 1,
+  "images_evaluated": 100,
+  "delegate_active": true,
+  "avg_invoke_ms": 144.82,
+  "avg_total_ms": 302.85,
+  "fps_from_avg_total": 3.3,
+  "result_tag": "npu_smoke",
+  "detections_json": "/opt/imx95-yolov8-benchmark/results/coco_detections_npu_smoke.json"
+}
