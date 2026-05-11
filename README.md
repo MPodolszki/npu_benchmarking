@@ -229,3 +229,91 @@ MODE=smoke SMOKE_IMAGES=100 SSHFS_TARGET=~/sshfs/imx95-yolov8-benchmark ./script
 ```
 
 Enthalten sind nur notwendige Dateien: Modell, Target-Skripte, Target-Requirements und COCO-Daten gemaess Modus.
+
+---
+
+## Schnellstart: NPU-Benchmark auf PHYTEC phyFLEX i.MX95 (verifizierter Pfad)
+
+Diese Schritte sind der getestete, reproduzierbare Weg fuer das BSP `phytec-vision-image` mit
+Kernel 6.12.34 und eIQ Neutron SDK 3.1.0.
+
+### Voraussetzungen
+
+| Was | Wo herunterladen |
+|---|---|
+| eIQ Neutron SDK 3.1.0 | NXP.com → `EIQ-NEUTRON-SDK-3.1.0-LIN.zip` (Account erforderlich) |
+| PHYTEC BSP ALPHA2 | `phytec-vision-image` auf dem Board geflasht |
+| COCO val2017 | `./scripts/01_download_coco.sh` |
+| YOLOv8s TFLite INT8 | Bereits unter `models/neutron/yolov8s_1024_imx95_neutron_int8_sdk310.tflite` |
+
+### Schritt 1 — env.sh anpassen
+
+```bash
+cp env.sh.example env.sh
+# TARGET_IP, TARGET_USER, TARGET_DIR setzen
+```
+
+### Schritt 2 — Neutron-Runtime auf das Board deployen
+
+```bash
+SDK=/pfad/zu/eiq-neutron-sdk-linux-3.1.0
+TARGET_IP=<BOARD_IP>
+
+scp "${SDK}/target/imx95/imx95/NeutronFirmware.elf"      root@${TARGET_IP}:/lib/firmware/
+scp "${SDK}/target/imx95/imx95/libNeutronDriver.so"       root@${TARGET_IP}:/usr/lib/
+scp "${SDK}/target/imx95/delegate/libneutron_delegate.so" root@${TARGET_IP}:/usr/lib/
+ssh root@${TARGET_IP} ldconfig
+```
+
+### Schritt 3 — GO/NO_GO pruefen
+
+```bash
+./scripts/19_npu_gonogo_check.sh
+# Erwartetes Ergebnis: RESULT=GO
+```
+
+### Schritt 4 — COCO-Bilder + Skripte uebertragen
+
+```bash
+TARGET_DIR=/opt/imx95-yolov8-benchmark
+rsync -a data/coco/val2017/ root@${TARGET_IP}:${TARGET_DIR}/data/coco/val2017/
+scp data/coco/annotations/instances_val2017.json root@${TARGET_IP}:${TARGET_DIR}/data/coco/
+scp scripts/08b_run_inference_npu_tflite.py       root@${TARGET_IP}:${TARGET_DIR}/scripts/
+scp scripts/09_eval_coco.py                       root@${TARGET_IP}:${TARGET_DIR}/scripts/
+scp models/neutron/yolov8s_1024_imx95_neutron_int8_sdk310.tflite \
+    root@${TARGET_IP}:${TARGET_DIR}/models/neutron/yolov8s_1024_imx95_neutron_int8.tflite
+```
+
+### Schritt 5 — Benchmark ausfuehren
+
+```bash
+ssh root@${TARGET_IP} \
+  "cd ${TARGET_DIR} && WARMUP=5 RESULT_TAG=npu_full python3 scripts/08b_run_inference_npu_tflite.py"
+```
+
+Laeuft ca. 25 Minuten. Fortschrittsausgabe alle 100 Bilder.
+
+### Schritt 6 — Ergebnisse holen und mAP berechnen
+
+```bash
+mkdir -p results/npu_full
+scp "root@${TARGET_IP}:${TARGET_DIR}/results/coco_detections_npu_full.json" results/npu_full/
+scp "root@${TARGET_IP}:${TARGET_DIR}/results/timing_breakdown_npu_full.csv"  results/npu_full/
+
+# mAP auf dem Host auswerten (pycocotools benoetigt):
+python3 -m pip install pycocotools -q
+IMX95_BENCH_ROOT=. RESULT_TAG=npu_full python3 scripts/09_eval_coco.py
+```
+
+### Benchmark-Ergebnisse (verifiziert, 11. Mai 2026)
+
+| Metrik | Wert |
+|---|---|
+| mAP@50:95 | **0.335** |
+| mAP@50 | **0.502** |
+| Avg NPU invoke | **145.5 ms** |
+| FPS (end-to-end) | **3.38** |
+| Images | 5000 (COCO val2017) |
+| Board | PHYTEC phyFLEX i.MX95, Kernel 6.12.34 |
+| Delegate | NeutronDelegate v1.0.0-d98743a7 |
+| SDK | eIQ Neutron 3.1.0 |
